@@ -12722,5 +12722,8 @@
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
     "sweetalert2": "^11.7.12"
+  },
+  "scripts": {
+    "start": "ng serve"
   }
 }
