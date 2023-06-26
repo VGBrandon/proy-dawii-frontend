@@ -1,0 +1,103 @@
+
+<app-menu></app-menu>
+
+<div class="container">
+    
+    <div class="mat-card" style="margin: auto;">
+      <div class="mat-card-header">
+        <h2 class="mat-card-title">PC1-Baygorrea</h2>
+      </div>
+      
+      <form class="mat-card-content" (ngSubmit)="insertado()" [formGroup]="formRegistra">
+        <div class="mat-card-subtitle">
+          <h6>Registro de Libro</h6>
+        </div>
+        
+        <div class="mat-card-content"  size="50">
+          <div class="mat-col-lg-3" style="margin-right: 10px;">
+            <mat-form-field>
+              <mat-label>Título</mat-label>
+              <input matInput type="text" name="titulo" id="titulo" [(ngModel)]="libro.titulo" formControlName="titulo" />
+              <mat-hint style="color:red; white-space: nowrap;" *ngIf="formRegistra.controls.titulo.touched">
+                <span *ngIf="formRegistra.controls.titulo.hasError('required')">
+                  El Titulo es requerido.
+                </span>
+                <span *ngIf="formRegistra.controls.titulo.hasError('pattern')">
+                  El Titulo es 3 a 30 carácteres.
+                </span>
+            </mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="mat-col-lg-4" style="margin-right: 10px;">
+            <mat-form-field>
+              <mat-label>Año</mat-label>
+              <input matInput type="text" name="anio" id="anio" [(ngModel)]="libro.anio"   formControlName="anio" />
+              <mat-hint style="color:red; white-space: nowrap;" *ngIf="formRegistra.controls.anio.touched">
+                <span *ngIf="formRegistra.controls.anio.hasError('required')">
+                  El Año es requerido.
+                </span>
+                <span *ngIf="formRegistra.controls.anio.hasError('pattern')">
+                  El Año admite 4 dígitos.
+                </span>
+                
+                <span *ngIf="formRegistra.controls.anio.hasError('min') || formRegistra.controls.anio.hasError('max')">
+                  El Año es en un intervalo entre 1994 a 2099.
+                </span>
+            </mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="mat-col-lg-3">
+            <mat-form-field>
+              <mat-label>Serie</mat-label>
+              <input matInput type="text" id="serie" name="serie" [(ngModel)]="libro.serie" formControlName="serie" />
+              <mat-hint style="color:red; white-space: nowrap;" *ngIf="formRegistra.controls.serie.touched">
+                <span *ngIf="formRegistra.controls.serie.hasError('required')">
+                  La serie es requerida.
+                </span>
+                <span *ngIf="formRegistra.controls.serie.hasError('pattern')">
+                  La serie solo admite 2 carácteres y 10 dígitos.
+                </span>
+            </mat-hint>
+            
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div class="mat-card-content">
+          <div class="mat-col-lg-3" style="margin-right: 10px;">
+            <mat-form-field>
+              <mat-label>Categoria de Libro</mat-label>
+              <mat-select id="categoria" name="categoria" [(ngModel)]="libro.categoriaLibro!.idDataCatalogo" formControlName="categoria">
+                <mat-option value="-1">[Seleccione]</mat-option>
+                <mat-option *ngFor="let x of categoria" [value]="x.idDataCatalogo">
+                  {{ x.descripcion }}
+                </mat-option>
+              </mat-select>
+              <mat-hint style="color:red; white-space: nowrap;" *ngIf="!(formRegistra.controls.categoria.errors == null) && formRegistra.controls.categoria.touched">
+                La Categoría es requerida.
+              </mat-hint> 
+            </mat-form-field>
+          </div>
+          <div class="mat-col-lg-3">
+            <mat-form-field>
+              <mat-label>Tipo de Libro</mat-label>
+              <mat-select id="tipolibro" name="tipolibro" [(ngModel)]="libro.tipoLibro!.idDataCatalogo" formControlName="tipolibro">
+                <mat-option value="-1">[Seleccione]</mat-option>
+                <mat-option *ngFor="let x of tipolibro" [value]="x.idDataCatalogo">
+                  {{ x.descripcion }}
+                </mat-option>
+              </mat-select>
+              <mat-hint style="color:red; white-space: nowrap;" *ngIf="!(formRegistra.controls.tipolibro.errors == null) && formRegistra.controls.tipolibro.touched">
+                El Tipo de Libro es requerido.
+              </mat-hint> 
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div class="mat-card-actions mat-align-center" >
+          <button mat-raised-button color="primary" [disabled]="formRegistra.invalid">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

@@ -1,0 +1,191 @@
+<div class="container">
+
+
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+
+<div class="row">
+    <mat-toolbar color="primary">
+        <span>Actualizar Libro</span>
+    </mat-toolbar>
+</div>
+<form class="content" id="idFormModalidad" [formGroup]="formActualiza">
+    <div class="submit-form">
+
+        <div class="row" style="margin-top: 25px;">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+
+
+
+    <mat-form-field class="col-md-8">
+        <mat-label>Título</mat-label>
+        <input matInput [(ngModel)]="libro.titulo" formControlName="titulo"
+            name="titulo">
+            <mat-hint style="color:red; white-space: nowrap;" *ngIf="formActualiza.controls.titulo.touched">
+                <span *ngIf="formActualiza.controls.titulo.hasError('required')">
+                  El Título es requerido.
+                </span>
+                <span *ngIf="formActualiza.controls.titulo.hasError('pattern')">
+                  El Título es 3 a 30 carácteres.
+                </span>
+            </mat-hint>
+    </mat-form-field>
+
+
+</div>
+</div>
+<div class="col-sm-12 col-md-6">
+<div class="form-group">
+
+
+
+    <mat-form-field class="col-md-8">
+        <mat-label>Año</mat-label>
+        <input matInput [(ngModel)]="libro.anio" formControlName="anio"
+            name="apellidos">
+            <mat-hint style="color:red; white-space: nowrap;" *ngIf="formActualiza.controls.anio.touched">
+                <span *ngIf="formActualiza.controls.anio.hasError('required')">
+                  El Año es requerido.
+                </span>
+                <span *ngIf="formActualiza.controls.anio.hasError('pattern')">
+                  El Año admite 4 dígitos.
+                </span>
+                
+                <span *ngIf="formActualiza.controls.anio.hasError('min') || formActualiza.controls.anio.hasError('max')">
+                  El Año es en un intervalo entre 1994 a 2099.
+                </span>
+            </mat-hint>
+    </mat-form-field>
+
+
+
+
+</div>
+</div>
+</div>
+
+
+<div class="row">
+
+
+<div class="col-sm-12 col-md-6">
+
+
+
+<mat-form-field class="col-md-4">
+    <mat-label>Serie</mat-label>
+    <input matInput [(ngModel)]="libro.serie" 
+        formControlName="serie" name="serie">
+        <mat-hint style="color:red; white-space: nowrap;" *ngIf="formActualiza.controls.serie.touched">
+            <span *ngIf="formActualiza.controls.serie.hasError('required')">
+              La serie es requerida.
+            </span>
+            <span *ngIf="formActualiza.controls.serie.hasError('pattern')">
+              La serie solo admite 2 carácteres y 10 dígitos.
+            </span>
+        </mat-hint>
+</mat-form-field>
+
+</div>
+
+</div>
+
+
+<div class="row">
+<div class="col-sm-12 col-md-6">
+
+
+
+    <mat-form-field class="col-md-4">
+        <mat-label>Categoría</mat-label>
+        <mat-select [(ngModel)]="libro.categoriaLibro!.idDataCatalogo" formControlName="categoria"
+            name="categoriaLibro">
+            <mat-option value="-1"> [Seleccione] </mat-option>
+            <mat-option *ngFor="let a of categoria" [value]="a.idDataCatalogo">
+                {{a.descripcion}}
+            </mat-option>
+        </mat-select>
+        <mat-hint style="color:red; white-space: nowrap;" *ngIf="!(formActualiza.controls.categoria.errors == null) && formActualiza.controls.categoria.touched">
+            La Categoría de Libro es requerido.
+          </mat-hint>
+    </mat-form-field>
+</div>
+
+
+
+
+
+<div class="col-sm-12 col-md-6">
+
+
+
+<mat-form-field class="col-md-4">
+    <mat-label>Tipo</mat-label>
+    <mat-select [(ngModel)]="libro.tipoLibro!.idDataCatalogo" formControlName="tipolibro"
+        name="tipolibro">
+        <mat-option value="-1"> [Seleccione] </mat-option>
+        <mat-option *ngFor="let a of tipolibro" [value]="a.idDataCatalogo">
+            {{a.descripcion}}
+        </mat-option>
+    </mat-select>
+    <mat-hint style="color:red; white-space: nowrap;" *ngIf="!(formActualiza.controls.tipolibro.errors == null) && formActualiza.controls.tipolibro.touched">
+        El Tipo de Libro es requerido.
+      </mat-hint>
+</mat-form-field>
+
+
+
+
+
+
+</div>
+
+
+
+<div class="col-sm-12 col-md-6">
+
+<mat-form-field class="col-md-4">
+    <mat-label>Estado</mat-label>
+    <mat-select [(ngModel)]="libro.estado" formControlName="estado" name="estado">
+        <mat-option value="-1"> [Seleccione] </mat-option>
+        <mat-option value="1"> Activo </mat-option>
+        <mat-option value="0"> Inactivo </mat-option>
+    </mat-select>
+    <mat-hint style="color:red" *ngIf="formActualiza.controls.estado.touched">
+        <span *ngIf="formActualiza.controls.estado.hasError('min')">
+            El estado es requerido
+        </span>
+    </mat-hint>
+</mat-form-field>
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="row" style="margin-top: 3%">
+                    <div class="col-lg-12">
+                        <!--                                                 
+-->
+                        <button mat-raised-button type="submit" color="primary" (click)="actualiza()"
+                            [disabled]="formActualiza.invalid" [mat-dialog-close]="1">
+                            Enviar
+                        </button>
+                        <button mat-button (click)="onNoClick()" color="primary" mat-stroked-button color="primary">
+                            Salir
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

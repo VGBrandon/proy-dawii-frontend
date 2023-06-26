@@ -1,0 +1,99 @@
+
+<app-menu></app-menu>
+<div class="container mat-elevation-z8" >
+   
+        <div class="row">
+            <mat-toolbar color="primary" >    
+            <span>CRUD Libro</span>    
+            </mat-toolbar>  
+        </div>
+
+        <div class="row" style="margin-top: 3%">
+            <mat-form-field class="col-md-4">
+                <mat-label>Título</mat-label>
+                <input  matInput [(ngModel)] ="filtro" >
+            </mat-form-field>
+
+      
+
+           
+        </div>
+
+        <div>
+
+          <button mat-raised-button  color="primary" type="button" (click)="consultaLibro()"  class="btn btn-primary btn-sm" id="id_btn_filtrar"  style="width: 150px">Filtrar</button>
+          <button mat-raised-button color="primary" type="button"  (click)="openAddDialog()" class='btn btn-primary btn-sm' style="width: 150px">Registrar</button>
+
+
+        </div>
+
+        <div class="row" style="margin-top: 3%">
+                <mat-table  #table  class="mat-cell" [dataSource]="datasource" style="width: 10%">
+                  <ng-container matColumnDef="idLibro">
+                    <mat-header-cell  mat-header-cell *matHeaderCellDef style="width: 10%">ID Libro</mat-header-cell>
+                    <mat-cell *matCellDef="let aux" style="width: 10%">{{ aux.idLibro}}</mat-cell>
+                  </ng-container>
+                      <ng-container matColumnDef="titulo">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >Título</mat-header-cell>
+                        <mat-cell *matCellDef="let aux" >{{ aux.titulo}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="anio">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >Año</mat-header-cell>
+                        <mat-cell *matCellDef="let aux" >{{ aux.anio }}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="categoriaLibro">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >Categoría</mat-header-cell>
+                        <mat-cell *matCellDef="let aux">{{ aux.categoriaLibro!.descripcion }} </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="tipoLibro">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >Tipo</mat-header-cell>
+                        <mat-cell *matCellDef="let aux">{{ aux.tipoLibro!.descripcion }} </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="serie">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >Serie</mat-header-cell>
+                        <mat-cell *matCellDef="let aux" >{{ aux.serie}}</mat-cell>
+                      </ng-container>
+                      
+                     
+                    
+                      <ng-container matColumnDef="estado">
+                        <mat-header-cell mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+                        <mat-cell *matCellDef="let aux">{{ aux.estado == 1 ? "Activo" : "Inactivo" }}</mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="actions">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >&nbsp;</mat-header-cell>
+
+                        <mat-cell *matCellDef="let aux; let i=index;">
+
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" 
+                                        id="idLibro_{{ aux.idLibro }}" name="estado" 
+                                        [checked]="aux.estado==1?true:false" 
+                                        (change)="actualizaEstado(aux)"  
+                                         />         
+                                <label class="custom-control-label" for="idLibro_{{ aux.idLibro }}"></label>
+                            </div>  
+
+                             <button mat-stroked-button color="primary" (click)="openUpdateDialog(aux)">
+                              Editar
+                              
+                             </button>
+
+                      
+                             <button  mat-stroked-button color="warn" (click)="elimina(aux)"
+                             >Eliminar
+                                
+                             </button> 
+                        </mat-cell>
+                      </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let aux; columns: displayedColumns"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[6,8,10]" showFirstLastButtons></mat-paginator>
+
+    </div> 
+
+
+    </div>

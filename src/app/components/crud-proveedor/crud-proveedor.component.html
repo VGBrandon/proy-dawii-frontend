@@ -1,0 +1,85 @@
+<app-menu></app-menu>
+<div class="container">
+        <div class="row">
+            <mat-toolbar color="primary" >    
+            <span>CRUD Proveedor</span>    
+            </mat-toolbar>  
+        </div>
+        <div class="row" style="margin-top: 1%">
+            <mat-form-field class="col-md-4">
+                <mat-label>Razon Social</mat-label>
+                <input  matInput [(ngModel)] ="filtro" >
+            </mat-form-field>
+
+          
+        </div>
+
+        <div>
+          <button mat-raised-button  color="primary" type="button" (click)="consultaProveedor()"  class="btn btn-primary btn-sm" id="id_btn_filtrar"  style="width: 150px">Filtrar</button>
+          <button mat-raised-button color="primary" type="button"  (click)="openAddDialog()" class='btn btn-primary btn-sm' style="width: 150px">Registrar</button>
+        </div>
+
+        <div class="row mat-elevation-z8" >
+                <mat-table  #table  class="container" [dataSource]="datasource" style="width: 10%" >
+                  <ng-container matColumnDef="idProveedor">
+                    <mat-header-cell  mat-header-cell *matHeaderCellDef style="width: 100%">ID Proveedor</mat-header-cell>
+                    <mat-cell class="small-column" *matCellDef="let aux" style="width: 100%">{{ aux.idProveedor}}</mat-cell>
+                  </ng-container>
+                      <ng-container matColumnDef="razonsocial">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef style="width: 100%">Razon Social</mat-header-cell>
+                        <mat-cell class="small-column" *matCellDef="let aux" style="width: 100%">{{ aux.razonsocial}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="ruc">
+                        <mat-header-cell   mat-header-cell *matHeaderCellDef style="width: 100%">Ruc</mat-header-cell>
+                        <mat-cell class="small-column" *matCellDef="let aux" style="width: 100%">{{ aux.ruc }}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="direccion">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef style="width: 100%">Direccion</mat-header-cell>
+                        <mat-cell class="small-column" *matCellDef="let aux" style="width: 100%">{{ aux.direccion}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="celular">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef style="width: 100%">Celular</mat-header-cell>
+                        <mat-cell class="small-column" *matCellDef="let aux" style="width: 100%" >{{ aux.celular}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="contacto">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef style="width: 100%">Contacto</mat-header-cell>
+                        <mat-cell class="small-column" *matCellDef="let aux" style="width: 100%" >{{ aux.contacto}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="categoriaPais">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef style="width: 100%">Pais</mat-header-cell>
+                        <mat-cell  *matCellDef="let aux" style="width: 100%">{{ aux.pais!.nombre }} </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="tipoProveedor">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef style="width: 100%" >Tipo</mat-header-cell>
+                        <mat-cell  *matCellDef="let aux" style="width: 100%">{{ aux.tipoProveedor!.descripcion }} </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="estado">
+                        <mat-header-cell mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+                        <mat-cell  *matCellDef="let aux">{{ aux.estado == 1 ? "Activo" : "Inactivo" }}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="actions" class="col-md-4" >
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef style="width: 100%">&nbsp;</mat-header-cell>
+                        <mat-cell  class="small-column" *matCellDef="let aux ; let i=index;" style="width: 100%">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" 
+                                        id="idProveedor_{{ aux.idProveedor }}" name="estado" 
+                                        [checked]="aux.estado==1?true:false" 
+                                        (change)="actualizaEstado(aux)"  
+                                         />         
+                            <label class="custom-control-label" for="idProveedor_{{ aux.idProveedor}}"></label>
+                            <button mat-stroked-button color="primary" (click)="openUpdateDialog(aux)">
+                              Editar                              
+                             </button>                      
+                             <button  mat-stroked-button color="warn" (click)="elimina(aux)"
+                             >Delete                               
+                             </button>  
+                            </div> 
+                             
+                        </mat-cell>
+                      </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let aux; columns: displayedColumns"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[6,8,10]" showFirstLastButtons></mat-paginator>
+        </div> 
+</div>

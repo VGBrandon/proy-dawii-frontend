@@ -1,0 +1,110 @@
+
+<app-menu></app-menu>
+<div class="container">
+  <div class="container mat-elevation-z8" >
+   
+    <div class="row">
+        <mat-toolbar color="primary" >    
+        <span>CRUD Sala</span>    
+        </mat-toolbar>  
+    </div>
+
+    <div class="row" style="margin-top: 3%">
+        <mat-form-field class="col-md-4">
+            <mat-label>Número</mat-label>
+            <input  matInput [(ngModel)] ="filtro" >
+        </mat-form-field>           
+    </div>
+
+    <div>
+
+      <button mat-raised-button  color="primary" type="button" (click)="consultaSala()"  class="btn btn-primary btn-sm" id="id_btn_filtrar"  style="width: 150px">Filtrar</button>
+      <button mat-raised-button color="primary" type="button"  (click)="openAddDialog()" class='btn btn-primary btn-sm' style="width: 150px">Registrar</button>
+
+
+    </div>
+
+    <div class="row " style="margin-top: 3%; padding: 2%;">
+      <mat-table  #table  class="mat-cell" [dataSource]="dataSource" >
+
+              <ng-container matColumnDef="idSala" style="padding: 20px;">
+                <mat-header-cell  mat-header-cell *matHeaderCellDef style="width: 10%">Codígo</mat-header-cell>
+                <mat-cell *matCellDef="let aux" style="width: 20px">{{ aux.idSala}}</mat-cell>
+              </ng-container>
+                  <ng-container matColumnDef="numero">
+                    <mat-header-cell  mat-header-cell *matHeaderCellDef >Número</mat-header-cell>
+                    <mat-cell *matCellDef="let aux" style="width: 50px">{{ aux.numero}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="piso">
+                    <mat-header-cell  mat-header-cell *matHeaderCellDef >Piso</mat-header-cell>
+                    <mat-cell *matCellDef="let aux" style="width: 50px">{{ aux.piso }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="numAlumnos">
+                    <mat-header-cell  mat-header-cell *matHeaderCellDef >Número de Alumnos</mat-header-cell>
+                    <mat-cell *matCellDef="let aux" style="width: 50px">{{ aux.numAlumnos }} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="recursos">
+                    <mat-header-cell  mat-header-cell *matHeaderCellDef >Recursos</mat-header-cell>
+                    <mat-cell *matCellDef="let aux" style="width: 50px">{{ aux.recursos }} </mat-cell>
+                  </ng-container>
+
+                  <!-----
+                  
+                  
+                    <ng-container matColumnDef="idTipoSala">
+                    <mat-header-cell  mat-header-cell *matHeaderCellDef >Tipo Sala</mat-header-cell>
+                    <mat-cell *matCellDef="let aux" >{{ aux.idTipoSala }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="idTipoSesde">
+                    <mat-header-cell  mat-header-cell *matHeaderCellDef >Sede</mat-header-cell>
+                    <mat-cell *matCellDef="let aux" >{{ aux.idTipoSesde }}</mat-cell>
+                  </ng-container>
+                  
+                  
+                  
+                  -->
+                
+                 
+                
+                  <ng-container matColumnDef="estado">
+                    <mat-header-cell mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+                    <mat-cell *matCellDef="let aux">{{ aux.estado == 1 ? "Activo" : "Inactivo" }}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell  mat-header-cell *matHeaderCellDef >&nbsp;</mat-header-cell>
+
+                    <mat-cell *matCellDef="let aux; let i=index;">
+
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" 
+                                    id="idSala_{{ aux.idSala }}" name="estado" 
+                                    [checked]="aux.estado==1?true:false" 
+                                    (change)="actualizaEstado(aux)"  
+                                     />         
+                            <label class="custom-control-label" for="idSala_{{ aux.idSala }}"></label>
+                        </div>  
+
+                         <button mat-stroked-button color="primary" (click)="openUpdateDialog(aux)">
+                          Editar
+                          
+                         </button>
+
+                  
+                         <button  mat-stroked-button color="warn" (click)="elimina(aux)"
+                         >Eliminar
+                            
+                         </button> 
+                    </mat-cell>
+                  </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let aux; columns: displayedColumns"></mat-row>
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[6,8,10]" showFirstLastButtons></mat-paginator>
+
+</div> 
+
+
+</div>
+</div>

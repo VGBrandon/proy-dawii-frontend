@@ -1,0 +1,117 @@
+
+<app-menu></app-menu>
+<div class="container mat-elevation-z8" >
+   
+        <div class="row">
+            <mat-toolbar color="primary" >    
+            <span>CRUD Autor</span>    
+            </mat-toolbar>  
+        </div>
+
+        <div class="row" style="margin-top: 3%">
+            <mat-form-field class="col-md-4">
+                <mat-label>Nombre</mat-label>
+                <input  matInput [(ngModel)] ="filtro" >
+            </mat-form-field>
+
+        <!--     <mat-form-field class="col-3">
+              <mat-label>Pais</mat-label>
+              <mat-select [(ngModel)]="selPais" id="pais" name="pais">
+                      <mat-option value="-1"> [Seleccione] </mat-option>
+                      <mat-option *ngFor="let aux of lstPais"
+                              value="{{aux.idPais}}">
+                              {{aux.nombre}}
+                      </mat-option>
+              </mat-select>
+      </mat-form-field>
+
+
+      <mat-checkbox class="example-margin" [(ngModel)]="estado"
+      checked name="estado" class="col-3">Estado
+      </mat-checkbox>
+ -->
+
+           
+        </div>
+
+        <div>
+
+          <button mat-raised-button  color="primary" type="button" (click)="consultaAutor()"  class="btn btn-primary btn-sm" id="id_btn_filtrar"  style="width: 150px">Filtrar</button>
+          <button mat-raised-button color="primary" type="button"  (click)="openAddDialog()" class='btn btn-primary btn-sm' style="width: 150px">Registrar</button>
+
+
+        </div>
+
+        <div class="row" style="margin-top: 3%">
+                <mat-table  #table  class="mat-cell" [dataSource]="dataSource" style="width: 10%">
+                  <ng-container matColumnDef="idAutor">
+                    <mat-header-cell  mat-header-cell *matHeaderCellDef style="width: 10%">idAutor</mat-header-cell>
+                    <mat-cell *matCellDef="let aux" style="width: 10%">{{ aux.idAutor}}</mat-cell>
+                  </ng-container>
+                      <ng-container matColumnDef="nombre">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >Nombre</mat-header-cell>
+                        <mat-cell *matCellDef="let aux" >{{ aux.nombres}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="apellidos">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >Apellidos</mat-header-cell>
+                        <mat-cell *matCellDef="let aux" >{{ aux.apellidos }}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="grado">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >Grado</mat-header-cell>
+                        <mat-cell *matCellDef="let aux">{{ aux.grado!.descripcion }} </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="pais">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >Pais</mat-header-cell>
+                        <mat-cell *matCellDef="let aux">{{ aux.pais!.nombre }} </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="telefono">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >telefono</mat-header-cell>
+                        <mat-cell *matCellDef="let aux" >{{ aux.telefono}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="fechanacimiento">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >Fecha nacimiento</mat-header-cell>
+                        <mat-cell *matCellDef="let aux" >{{ aux.fechaNacimiento | date:"dd/MM/yyyy"}}</mat-cell>
+                      </ng-container>
+                     
+                    
+                      <ng-container matColumnDef="estado">
+                        <mat-header-cell mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+                        <mat-cell *matCellDef="let aux">{{ aux.estado == 1 ? "Activo" : "Inactivo" }}</mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="actions">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >&nbsp;</mat-header-cell>
+
+                        <mat-cell *matCellDef="let aux; let i=index;">
+
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" 
+                                        id="idAutor_{{ aux.idAutor }}" name="estado" 
+                                        [checked]="aux.estado==1?true:false" 
+                                        (change)="actualizaEstado(aux)"  
+                                         />         
+                                <label class="custom-control-label" for="idAutor_{{ aux.idAutor }}"></label>
+                            </div>  
+
+                             <button mat-stroked-button color="primary" (click)="openUpdateDialog(aux)">
+                              Editar
+                              
+                             </button>
+
+                      
+                             <button  mat-stroked-button color="warn" (click)="elimina(aux)"
+                             >Eliminar
+                                
+                             </button> 
+                        </mat-cell>
+                      </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let aux; columns: displayedColumns"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[6,8,10]" showFirstLastButtons></mat-paginator>
+
+    </div> 
+
+
+    </div>

@@ -1,0 +1,172 @@
+
+
+<div class="container">
+
+
+    <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+
+                <div class="row">
+                    <mat-toolbar color="primary" >    
+                      <span>Actualiza Proveedor</span>    
+                    </mat-toolbar>  
+              </div>
+                    <form class="content"  id="idFormModalidad" [formGroup]="formsActualiza" >
+                            <div class="submit-form">
+
+                                    <div class="row" style="margin-top: 25px;">
+                                            <div class="col-sm-6 ">
+                                                    <div class="form-group">
+                                                                  <mat-form-field class="col-md-12">
+                                                                            <mat-label>Razon Social</mat-label>
+                                                                            <input  matInput [(ngModel)] ="objProveedor.razonsocial"  formControlName="validaRazonSocial" name="razonsocial" >
+                                                                            <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaRazonSocial.touched">
+                                                                                <span *ngIf="formsActualiza.controls.validaRazonSocial.hasError('required')">
+                                                                                El Nombre es requerido
+                                                                                </span>
+                                                                                <span *ngIf="formsActualiza.controls.validaRazonSocial.hasError('pattern')">
+                                                                                El Nombre es 3 a 30 caracteres
+                                                                                </span>
+                                                                            </mat-hint> 
+                                                                        </mat-form-field>
+
+                                                                        <mat-form-field class="col-md-12">
+                                                                            <mat-label>Ruc</mat-label>
+                                                                            <input  matInput [(ngModel)] ="objProveedor.ruc"  formControlName="validaRuc" name="ruc" >
+                                                                            <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaRuc.touched">
+                                                                                <span *ngIf="formsActualiza.controls.validaRuc.hasError('required')">
+                                                                                El Ruc es requerido
+                                                                                </span>
+                                                                                <span *ngIf="formsActualiza.controls.validaRuc.hasError('pattern')">
+                                                                                El Ruc 12 digitos
+                                                                                </span>
+                                                                            </mat-hint> 
+                                                                        </mat-form-field>
+
+                                                                        <mat-form-field class="col-md-12">
+                                                                            <mat-label>Celular</mat-label>
+                                                                            <input  matInput  [(ngModel)]="objProveedor.celular" formControlName="validaCelular" name="celular" >
+                                                                            <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaCelular.touched">
+                                                                                <span *ngIf="formsActualiza.controls.validaCelular.hasError('required')">
+                                                                                    El Celular es requerido
+                                                                                </span>
+                                                                                <span *ngIf="formsActualiza.controls.validaCelular.hasError('pattern')">
+                                                                                    El Celular es de 9 digitos
+                                                                                </span> 
+                                                                            </mat-hint>
+                                                                        </mat-form-field>
+
+                                                                        <mat-form-field class="col-md-12">
+                                                                            <mat-label>Contacto</mat-label>
+                                                                            <input  matInput  [(ngModel)]="objProveedor.contacto" formControlName="validaContacto" name="contacto" >
+                                                                            <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaContacto.touched">
+                                                                                <span *ngIf="formsActualiza.controls.validaContacto.hasError('required')">
+                                                                                    El Contacto es requerido
+                                                                                </span>
+                                                                                <span *ngIf="formsActualiza.controls.validaContacto.hasError('pattern')">
+                                                                                    El Contacto es de 3 a 20 caracteres
+
+                                                                                </span> 
+                                                                            </mat-hint>
+                                                                        </mat-form-field>
+
+
+                                                    </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                    <div class="form-group">                                                         
+                                                        <mat-form-field class="col-md-12">
+                                                            <mat-label>Direccion</mat-label>
+                                                            <input  matInput  [(ngModel)]="objProveedor.direccion" formControlName="validaDireccion" name="direccion" >
+                                                            <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaDireccion.touched">
+                                                                <span *ngIf="formsActualiza.controls.validaDireccion.hasError('required')">
+                                                                    La Direccion es requerido
+                                                                </span>
+                                                                <span *ngIf="formsActualiza.controls.validaDireccion.hasError('pattern')">
+                                                                    La Direccion es de 3 30 caracteres
+                                                                </span> 
+                                                            </mat-hint>
+                                                        </mat-form-field>  
+
+
+                                                        <mat-form-field class="col-md-12">
+                                                            <mat-label>Pais</mat-label>
+                                                            <mat-select  [(ngModel)]="objProveedor.pais!.idPais" formControlName="validaPais" name="idPais" >
+                                                                <mat-option value="-1"> [Seleccione] </mat-option>
+                                                                <mat-option  *ngFor="let x of lstPais"  [value]="x.idPais">
+                                                                    {{x.nombre}}
+                                                                </mat-option> 
+                                                            </mat-select>
+                                                            <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaPais.touched" >
+                                                                <span *ngIf="formsActualiza.controls.validaPais.hasError('min')">
+                                                                    El pais es requerido
+                                                                </span>
+                                                            </mat-hint>  
+                                                        </mat-form-field> 
+
+                                                        <mat-form-field class="col-md-12">
+                                                            <mat-label>Tipo Proveedor</mat-label>
+                                                            <mat-select  [(ngModel)]="objProveedor.tipoProveedor!.idDataCatalogo" formControlName="validaTipoProveedor" name="idTipoProveedor" >
+                                                                <mat-option value="-1"> [Seleccione] </mat-option>
+                                                                <mat-option *ngFor="let a of lstProveedor" [value]="a.idDataCatalogo">
+                                                                    {{a.descripcion}}
+                                                                </mat-option> 
+                                                            </mat-select>
+                                                            <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaTipoProveedor.touched" >
+                                                                <span *ngIf="formsActualiza.controls.validaTipoProveedor.hasError('min')">
+                                                                    El proveedror es requerido
+                                                                </span>
+                                                            </mat-hint>  
+                                                        </mat-form-field> 
+
+                                                        <mat-form-field class="col-md-12">
+                                                            <mat-label>Estado</mat-label>
+                                                            <mat-select   
+                                                            [(ngModel)]="objProveedor.estado" formControlName="validaEstado" name="estado">
+                                                                <mat-option value="-1"> [Seleccione] </mat-option>
+                                                                <mat-option value="1"> Activo </mat-option>
+                                                                <mat-option value="0"> Inactivo </mat-option>
+                                                            </mat-select>
+                                                            <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaEstado.touched" >
+                                                                <span *ngIf="formsActualiza.controls.validaEstado.hasError('min')">
+                                                                    El estado es requerido
+                                                                </span>
+                                                            </mat-hint>  
+                                                        </mat-form-field> 
+                                                                        
+
+                                                    </div>
+                                            </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            <div class="row" style="margin-top: 1%">
+                                <div class="col-md-6">
+                                        
+                                    <button mat-raised-button 
+                                            type="submit" 
+                                            color="primary" 
+                                            (click)="actualiza()"  
+                                            [disabled]="formsActualiza.invalid"
+                                            [mat-dialog-close]="1">
+                                            Enviar
+                                    </button>
+                                    
+                                    <button mat-button 
+                                    (click)="onNoClick()"
+                                    color="primary"
+                                    mat-stroked-button color="primary">
+                                    Salir
+                                    </button>
+                                </div>
+                            </div>
+
+                    </form>
+
+            </div>
+    </div>
+</div>

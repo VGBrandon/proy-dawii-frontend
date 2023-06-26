@@ -1,0 +1,29 @@
+/* Structure */
+.container {
+  display: flex;
+  flex-direction: column;
+}
+table{
+  width: 100%;
+ }
+
+ .mat-column-idSala {
+  flex: 0 0 7%;
+}
+.mat-column-numero {
+  flex: 0 0 12%;
+}
+.mat-column-piso{
+  flex: 0 0 12%;
+}
+.mat-column-numAlumnos{
+  flex: 0 0 9%;
+}
+.mat-column-recursos{
+  flex: 0 0 9%;
+}
+
+button {
+  margin-right: 1rem;
+  width: 40%;
+}

@@ -1,0 +1,68 @@
+<app-menu></app-menu>
+<div class="mat-container" style="padding: 2%; display: flex; justify-content: center; align-items: center">
+  <h3>PC2-Baygorrea</h3>
+</div>
+<div class="mat-container" style="padding: 2%; display: flex; justify-content: center; align-items: center">
+  <form class="mat-content" (ngSubmit)="consultaLibro()" style="width: 80%;">
+    <div class="mat-submit-form">
+
+      <div class="mat-row" style="display: flex; justify-content: center; align-items: center;">
+        <div class="mat-col-lg-3" style="margin-right: 10px;">
+          <mat-form-field>
+            <mat-label>Título</mat-label>
+            <input type="text" matInput name="titulo" id="titulo" [(ngModel)]="titulo" />
+          </mat-form-field>
+        </div>
+        <div class="mat-col-lg-3" style="margin-right: 10px;">
+          <mat-form-field>
+            <mat-label>Categoría de Libro</mat-label>
+            <mat-select name="Categoria" [(ngModel)]="categoriaLibro">
+              <mat-option value="-1">[Seleccione]</mat-option>
+              <mat-option *ngFor="let x of categoria" [value]="x.idDataCatalogo">{{ x.descripcion }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="mat-col-lg-3"  style="margin-right: 10px;">
+          <mat-form-field>
+            <mat-label>Tipo de Libro</mat-label>
+            <mat-select name="Tipo" [(ngModel)]="tipoLibro">
+              <mat-option value="-1">[Seleccione]</mat-option>
+              <mat-option *ngFor="let x of tipolibro" [value]="x.idDataCatalogo">{{ x.descripcion }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      
+
+      <div class="mat-row" style="margin-right: 70px; margin-top:-20px;">
+        <button mat-raised-button color="primary">Filtrar</button>
+      </div>
+    </div>
+      <div class="col-12" style="padding: 2%">
+        <div class="mat-elevation-z8">
+          <mat-table class="mat-elevation-z8" [dataSource]="dataSource" style="width: 100%;">
+            <ng-container matColumnDef="idLibro">
+              <th mat-header-cell *matHeaderCellDef  style="width: 30%;">ID</th>
+              <td mat-cell *matCellDef="let x" style="width: 30%;">{{ x.idLibro }}</td>
+            </ng-container>
+            <ng-container matColumnDef="titulo">
+              <th mat-header-cell *matHeaderCellDef style="width: 100%">Título</th>
+              <td mat-cell *matCellDef="let x" style="width: 100%">{{ x.titulo }}</td>
+            </ng-container>
+            <ng-container matColumnDef="categoriaLibro">
+              <th mat-header-cell *matHeaderCellDef style="width: 100%">Categoría de Libro</th>
+              <td mat-cell *matCellDef="let x" style="width: 100%">{{ x.categoriaLibro!.descripcion }}</td>
+            </ng-container>
+            <ng-container matColumnDef="tipoLibro">
+              <th mat-header-cell *matHeaderCellDef style="width: 100%">Tipo de Libro</th>
+              <td mat-cell *matCellDef="let x" style="width: 100%">{{ x.tipoLibro!.descripcion }}</td>
+            </ng-container>
+            
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+     
+
+    </div>
+
+</div>

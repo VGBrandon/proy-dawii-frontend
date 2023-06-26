@@ -1,0 +1,109 @@
+<app-menu></app-menu>
+<div class="container">
+  <div class="col-lg-12">
+    <mat-toolbar color="primary">
+      <span>Registro de Alumno</span>
+    </mat-toolbar>
+  </div>
+  <form class="content" style="padding: 1%;" [formGroup]="formRegistra" (ngSubmit)="registraProveedor()">
+    <div class="submit-form">
+        <mat-form-field class="col-3">
+            <mat-label>Razon Social</mat-label>
+              <input matInput type="text" name="razonsocial" id="razonsocial" [(ngModel)]="objProveedor.razonsocial" formControlName="razonsocial" />
+                <mat-hint style="color:red; white-space: nowrap;" *ngIf="formRegistra.controls.razonsocial.touched">
+                <span *ngIf="formRegistra.controls.razonsocial.hasError('required')">
+                La Razon social  es requerido.
+                </span>
+                <span *ngIf="formRegistra.controls.razonsocial.hasError('pattern')">
+                La Razon social es 3 a 30 carácteres.
+                </span>
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label>Ruc</mat-label>
+            <input matInput type="text" name="ruc" id="ruc" [(ngModel)]="objProveedor.ruc"   formControlName="ruc" />
+            <mat-hint style="color:red; white-space: nowrap;" *ngIf="formRegistra.controls.ruc.touched">
+              <span *ngIf="formRegistra.controls.ruc.hasError('required')">
+                El Ruc es requerido.
+              </span>
+              <span *ngIf="formRegistra.controls.ruc.hasError('pattern')">
+                El ruc tiene 11 digitos
+              </span> 
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label>Direccion</mat-label>
+            <input matInput type="text" id="direccion" name="direccion" [(ngModel)]="objProveedor.direccion" formControlName="direccion" />
+            <mat-hint style="color:red; white-space: nowrap;" *ngIf="formRegistra.controls.direccion.touched">
+              <span *ngIf="formRegistra.controls.direccion.hasError('required')">
+                La direccion es requerida.
+              </span>
+              <span *ngIf="formRegistra.controls.direccion.hasError('pattern')">
+                La direccion solo admite 2 carácteres y 30 caracteres.
+              </span>
+          </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label>Celular</mat-label>
+            <input matInput type="text" id="celular" name="celular" [(ngModel)]="objProveedor.celular" formControlName="celular" />
+            <mat-hint style="color:red; white-space: nowrap;" *ngIf="formRegistra.controls.celular.touched">
+              <span *ngIf="formRegistra.controls.celular.hasError('required')">
+                El celular es requerido.
+              </span>
+              <span *ngIf="formRegistra.controls.direccion.hasError('pattern')">
+                El celular tiene 9 digitos
+              </span>
+          </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label>Contacto</mat-label>
+            <input matInput type="text" id="contacto" name="contacto" [(ngModel)]="objProveedor.contacto" formControlName="contacto" />
+            <mat-hint style="color:red; white-space: nowrap;" *ngIf="formRegistra.controls.contacto.touched">
+              <span *ngIf="formRegistra.controls.contacto.hasError('required')">
+                El contacto es requerido.
+              </span>
+              <span *ngIf="formRegistra.controls.direccion.hasError('pattern')">
+                El contacto tiene de 3 a 20 caracteres
+              </span>
+          </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label>Pais</mat-label>
+            <mat-select  [(ngModel)]="objProveedor.pais!.idPais" formControlName="validaPais" name="idPais" >
+              <mat-option value="-1"> [Seleccione] </mat-option>
+              <mat-option  *ngFor="let x of lstPais"  [value]="x.idPais">
+                  {{x.nombre}}
+              </mat-option> 
+          </mat-select>
+            <mat-hint style="color:red" *ngIf="formRegistra.controls.validaPais.touched" >
+              <span *ngIf="formRegistra.controls.validaPais.hasError('min')">
+                El pais es requerido
+              </span>
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label>Tipo de Proveedor</mat-label>
+            <mat-select id="tipoproveedor" name="tipoproveedor" [(ngModel)]="objProveedor.tipoProveedor!.idDataCatalogo" formControlName="tipoproveedor">
+              <mat-option value="-1">[Seleccione]</mat-option>
+              <mat-option *ngFor="let x of tipoproveedor" [value]="x.idDataCatalogo">
+                {{ x.descripcion }}
+              </mat-option>
+            </mat-select>
+            <mat-hint style="color:red; white-space: nowrap;" *ngIf="!(formRegistra.controls.tipoproveedor.errors == null) && formRegistra.controls.tipoproveedor.touched">
+              El Tipo de Proveedor es requerido.
+            </mat-hint> 
+          </mat-form-field>
+
+          <div class="col-3" >
+            <button mat-raised-button color="primary" [disabled]="formRegistra.invalid">Registrar</button>
+          </div>
+
+    </div>
+  </form>
+</div>
