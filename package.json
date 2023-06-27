@@ -12726,7 +12726,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "heroku-postbuild": "ng build",
     "ng":"ng"
   },
   "engines": {
